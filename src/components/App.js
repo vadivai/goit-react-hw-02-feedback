@@ -1,8 +1,15 @@
 import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
-import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
-import { Statistics } from './Statistics/Statistics';
-import { StatisticsStyle } from './Statistics/Statistics.styled';
+import {
+  Section,
+  FeedbackOptions,
+  Statistics,
+  StatisticsStyle,
+} from 'components';
+// import { Section } from './Section/Section';
+// import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+// import { Statistics } from './Statistics/Statistics';
+// import { StatisticsStyle } from './Statistics/Statistics.styled';
 
 export class App extends Component {
   state = {
@@ -43,23 +50,25 @@ export class App extends Component {
 
     return (
       <>
-        <h2>Please leave feedback</h2>
-        <FeedbackOptions
-          options={this.state}
-          onLeaveFeedback={this.onUpdateState}
-        />
-        <h3>Statistics</h3>
-        <StatisticsStyle>
-          {total > 0 ? (
-            <Statistics
-              options={this.state}
-              total={total}
-              positivePercentage={positiveFeedbackPercentage}
-            />
-          ) : (
-            <h3>There is no feedback</h3>
-          )}
-        </StatisticsStyle>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={this.state}
+            onLeaveFeedback={this.onUpdateState}
+          />
+        </Section>
+        <Section title="Statistics">
+          <StatisticsStyle>
+            {total > 0 ? (
+              <Statistics
+                options={this.state}
+                total={total}
+                positivePercentage={positiveFeedbackPercentage}
+              />
+            ) : (
+              <h3>There is no feedback</h3>
+            )}
+          </StatisticsStyle>
+        </Section>
         <GlobalStyle />
       </>
     );

@@ -1,4 +1,4 @@
-import { Button } from 'components/FeedbackOptions/FeedbackOptions.styled';
+import { Button } from './FeedbackOptions.styled';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return Object.keys(options).map(key => (
