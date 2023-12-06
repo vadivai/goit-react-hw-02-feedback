@@ -6,10 +6,7 @@ import {
   Statistics,
   StatisticsStyle,
 } from 'components';
-// import { Section } from './Section/Section';
-// import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
-// import { Statistics } from './Statistics/Statistics';
-// import { StatisticsStyle } from './Statistics/Statistics.styled';
+import { Notification } from './Notification';
 
 export class App extends Component {
   state = {
@@ -26,11 +23,20 @@ export class App extends Component {
     });
   };
 
-  countTotalFeedback = ({ good, neutral, bad }) => good + neutral + bad;
+  // countTotalFeedback = ({ good, neutral, bad }) => good + neutral + bad;
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
 
-  countPositiveFeedbackPercentage = ({ good, neutral, bad }) => {
-    // return Math.round((good / this.countTotalFeedback()) * 100);
-    return Math.round((good / (good + neutral + bad)) * 100);
+  // countPositiveFeedbackPercentage = ({ good, neutral, bad }) => {
+  //   // return Math.round((good / this.countTotalFeedback()) * 100);
+  //   return Math.round((good / (good + neutral + bad)) * 100);
+  // };
+
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    return Math.round((good / this.countTotalFeedback()) * 100);
   };
 
   render() {
@@ -38,15 +44,8 @@ export class App extends Component {
     // const total = good + neutral + bad;
     // const positiveFeedbackPercentage = Math.round((good / this.countTotalFeedback()) * 100);
 
-    const total = this.countTotalFeedback(this.state);
-    const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage(
-      this.state
-    );
-
-    //  const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage(
-    //    this.state,
-    //    this.countTotalFeedback(this.state)
-    //  );
+    const total = this.countTotalFeedback();
+    const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
 
     return (
       <>
@@ -65,7 +64,7 @@ export class App extends Component {
                 positivePercentage={positiveFeedbackPercentage}
               />
             ) : (
-              <h3>There is no feedback</h3>
+              <Notification />
             )}
           </StatisticsStyle>
         </Section>

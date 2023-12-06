@@ -9,7 +9,7 @@ export const Statistics = ({
       <span>Neutral: {neutral}</span>
       <span>Bad: {bad}</span>
       <span>Total: {total}</span>
-      <span>Positive feedback: {good > 0 && positivePercentage} %</span>
+      {good > 0 ? <span>Positive feedback: {positivePercentage}%</span> : null}
     </>
   );
 };
